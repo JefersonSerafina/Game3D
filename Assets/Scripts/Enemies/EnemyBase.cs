@@ -13,6 +13,7 @@ namespace Enemy
         public float startLife = 10f;
         public ParticleSystem particleSystem;
 
+
         private float _currentLife;
         [SerializeField] private AnimationBase _animationBase;
 
@@ -21,10 +22,13 @@ namespace Enemy
         public Ease startAnimationEase = Ease.OutBack;
         public bool startWithBornAnimation = true;
 
+        private Player _player;
+
         private void Awake()
         {
             Init();
         }
+
 
         protected virtual void ResetLife()
         {
@@ -55,6 +59,8 @@ namespace Enemy
             if (flashColor != null) flashColor.Flash();
             if (particleSystem != null) particleSystem.Emit(15);
 
+            transform.position -= transform.forward;
+
             _currentLife -= f;
 
             if( _currentLife <= 0 )
@@ -83,11 +89,28 @@ namespace Enemy
             {
                 OnDamage(5f);
             }
+
         }
 
         public void Damage(float damage)
         {
             OnDamage(damage);
+        }
+
+        public void Damage(float damage, Vector3 dir)
+        {
+            OnDamage(damage);
+            transform.DOMove(transform.position - dir, .1f);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Player p = collision.transform.GetComponent<Player>();
+
+            if (p != null)
+            {
+                p.Damage(1);
+            }
         }
     }
 }
