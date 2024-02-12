@@ -26,7 +26,9 @@ public class GunBase : MonoBehaviour
         var projectile = Instantiate(prefabProjectile);
         projectile.transform.position = positionToShoot.position;
         projectile.transform.rotation = positionToShoot.rotation;
-        projectile.speed = speed;  
+        projectile.speed = speed;
+
+        Shake.Instance.Shakee();
     }
 
     public void StartShoot()
