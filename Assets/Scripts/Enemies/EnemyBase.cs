@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Animaiton;
 
 namespace Enemy
@@ -23,6 +24,9 @@ namespace Enemy
         public bool startWithBornAnimation = true;
 
         private Player _player;
+
+        [Header("Events")]
+        public UnityEvent onKillEvent;
 
         private void Awake()
         {
@@ -52,6 +56,7 @@ namespace Enemy
             if (collider != null) collider.enabled = false;
             Destroy(gameObject, 3f);
             PlayAnimationByTrigger(AnimationType.DEATH);
+            onKillEvent?.Invoke();
         }
 
         public void OnDamage(float f)
