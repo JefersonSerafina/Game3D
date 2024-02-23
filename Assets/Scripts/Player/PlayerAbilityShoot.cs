@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerAbilityShoot : PlayerAbilityBase
 {
 
-    public GunBase gunBase;
+    public GunBase gunBase1;
+    public GunBase gunBase2;
     public Transform gunPosition;
 
     private GunBase _currentGun;
@@ -15,28 +16,53 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     {
         base.Init();
 
-        CreateGun();
+        SwitchGun(gunBase1);
 
         inputs.Gameplay.Shoot.performed += cts => StartShoot();
         inputs.Gameplay.Shoot.canceled += cts => CancelShoot();
     }
 
-    private void CreateGun()
+   
+    private void SwitchGun(GunBase newGun)
     {
-        _currentGun = Instantiate(gunBase, gunPosition);
-
+        if (_currentGun != null)
+        {
+            Destroy(_currentGun.gameObject);
+        }
+        _currentGun = Instantiate(newGun, gunPosition);
         _currentGun.transform.localPosition = _currentGun.transform.localEulerAngles = Vector3.zero;
     }
 
     private void StartShoot()
     {
-        _currentGun.StartShoot();
-        Debug.Log("Shoot");
+        if (_currentGun != null)
+        {
+            _currentGun.StartShoot();
+            Debug.Log("Shoot");
+        }
     }
 
     private void CancelShoot()
     {
-        Debug.Log("CancelShoot");
-        _currentGun.StopShoot();
+        if (_currentGun != null)
+        {
+            Debug.Log("CancelShoot");
+            _currentGun.StopShoot();
+        }
+    }
+
+    void Update()
+    {
+       
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SwitchGun(gunBase1);
+        }
+
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SwitchGun(gunBase2);
+        }
     }
 }

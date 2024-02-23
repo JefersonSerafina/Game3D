@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdfcfed0274d294d9294082ba8f7edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxType: 2
   itemType: 1
   compareTag: Player
   particleSystem: {fileID: 0}
@@ -119,7 +120,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 320013e4a539592499129bf81c319566, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f7b866098db31df4a9a8ef663ffdf31c, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 320013e4a539592499129bf81c319566, type: 3}
       propertyPath: m_Name
       value: MDL_Coin

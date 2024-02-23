@@ -6,6 +6,8 @@ namespace Cloth
 {
     public class ClothItemBase : MonoBehaviour
     {
+        public SFXType sfxType;
+
         public ClothType clothType;
         public float duration = 2f;
 
@@ -21,6 +23,7 @@ namespace Cloth
 
         public virtual void Collect()
         {
+            PlaySFX();
             var setup = ClothManager.Instance.GetSetupByType(clothType);
 
             Player.Instance.ChangeTexture(setup, duration);
@@ -31,6 +34,11 @@ namespace Cloth
         private void HideObject()
         {
             gameObject.SetActive(false);
+        }
+
+        private void PlaySFX()
+        {
+            SFXPool.Instance.Play(sfxType);
         }
 
     }

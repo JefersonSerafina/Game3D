@@ -77,7 +77,7 @@ public class SaveManager : Singleton<SaveManager>
     {
         string fileLoaded = "";
 
-        if (File.Exists(_path)) 
+        if (File.Exists(_path))
         {
             fileLoaded = File.ReadAllText(_path);
 
@@ -91,8 +91,10 @@ public class SaveManager : Singleton<SaveManager>
             Save();
         }
 
-
-        FileLoaded.Invoke(_saveSetup);
+        if (FileLoaded != null)
+        {
+            FileLoaded.Invoke(_saveSetup);
+        }
     }
 
     private void SaveLevelOne()

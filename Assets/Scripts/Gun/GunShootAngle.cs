@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunShootAngle : GunShootLimit
 {
     public int amountPerShoot = 4;
-    public float angle = 15f;
+    public float angle = 45f;
 
     public override void Shoot()
     {
@@ -14,10 +14,10 @@ public class GunShootAngle : GunShootLimit
             for(int i = 0; i < amountPerShoot; i++)
             {
 
-            if (i%2 ==0)
-            {
-                mult++;
-            }
+                if(i%2 == 0)
+                {
+                    mult++;
+                }
 
                 var projectile = Instantiate(prefabProjectile, positionToShoot);
 
